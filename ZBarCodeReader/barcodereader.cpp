@@ -12,7 +12,7 @@ BarCodeReader::BarCodeReader(QWidget *parent) :
     fsModel->setRootPath(QDir::currentPath());
     tree = new QTreeView(ui->FolderListView);
     tree->setModel(fsModel);
-  //  tree->setRootIndex(fsModel->index(QDir::currentPath()));
+   // tree->setRootIndex(fsModel->index(QDir::currentPath()));
 }
 
 BarCodeReader::~BarCodeReader()
