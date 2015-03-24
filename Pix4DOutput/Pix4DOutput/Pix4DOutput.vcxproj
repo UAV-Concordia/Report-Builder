@@ -67,13 +67,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Container.cpp" />
+    <ClCompile Include="ContaminatedField.cpp" />
+    <ClCompile Include="DebrisPile.cpp" />
     <ClCompile Include="driver.cpp" />
     <ClCompile Include="Feature.cpp" />
+    <ClCompile Include="Person.cpp" />
+    <ClCompile Include="ReportBuilder.cpp" />
+    <ClCompile Include="Structure.cpp" />
     <ClCompile Include="VolumeFileParser.cpp" />
     <ClCompile Include="XMLSurfaceParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Container.h" />
+    <ClInclude Include="ContaminatedField.h" />
+    <ClInclude Include="DebrisPile.h" />
     <ClInclude Include="Feature.h" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="ReportBuilder.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Structure.h" />
     <ClInclude Include="VolumeFileParser.h" />
     <ClInclude Include="XMLSurfaceParser.h" />
   </ItemGroup>

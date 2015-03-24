@@ -27,6 +27,24 @@
     <ClCompile Include="XMLSurfaceParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ContaminatedField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Structure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DebrisPile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Person.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Feature.h">
@@ -36,6 +54,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="XMLSurfaceParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ContaminatedField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Structure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebrisPile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Person.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
