@@ -26,7 +26,7 @@ private:
     QFileSystemModel *fsModel;
     QTreeView *tree;
     QProcess process;
-    QString cmd = QDir::currentPath() + "\\ZBar\\bin\\zbarimg";
+    QString cmd = QDir::currentPath() + "\\..\\ZBar\\bin\\zbarimg";
     void getBarcodeValue();
 };
 
