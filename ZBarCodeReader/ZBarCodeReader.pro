@@ -13,8 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        barcodereader.cpp
+        barcodereader.cpp \
+    reportgenerator.cpp
 
-HEADERS  += barcodereader.h
+HEADERS  += barcodereader.h \
+    reportgenerator.h
 
-FORMS    += barcodereader.ui
+FORMS    += barcodereader.ui \
+    reportgenerator.ui
