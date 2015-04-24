@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ZBarCodeReader
 TEMPLATE = app
 
+LIBS+=ZBar\lib\libzbar-0.lib
 
 SOURCES += main.cpp\
         barcodereader.cpp \

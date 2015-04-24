@@ -5,6 +5,7 @@
 #include <QProcess>
 #include <QFileSystemModel>
 #include <QTreeView>
+#include <ZBar\include\zbar.h>
 
 namespace Ui {
 class BarCodeReader;
@@ -26,8 +27,11 @@ private:
     QFileSystemModel *fsModel;
     QTreeView *tree;
     QProcess process;
+    QFile *file;
+    QTextStream *outStream;
+   // zbar::ImageScanner *decoder;
     QString cmd = QDir::currentPath() + "\\..\\ZBar\\bin\\zbarimg";
-    void getBarcodeValue();
+    void getBarcodeValue(QString imgName);
 };
 
 #endif // BARCODEREADER_H
