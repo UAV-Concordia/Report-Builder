@@ -46,10 +46,13 @@ void Feature::computeCentroid(){
 		zPos / boundingPolygon.size();
 	}
 
-	centroid.at(0) = xPos;
+	/*centroid.at(0) = xPos;
 	centroid.at(1) = yPos;
 	centroid.at(2) = zPos;
-
+	*/
+	centroid.push_back(xPos);
+	centroid.push_back(yPos);
+	centroid.push_back(zPos);
 }
 
 

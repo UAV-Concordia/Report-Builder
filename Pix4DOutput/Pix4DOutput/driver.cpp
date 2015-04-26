@@ -3,6 +3,7 @@
 #include <string>
 #include "VolumeFileParser.h"
 #include "XMLSurfaceParser.h"
+#include "XmlMaker.h"
 
 
 using namespace std;
@@ -15,10 +16,40 @@ int main()
 {
 	cout << "Hello World!" << endl;
 	
+	//Just a variable to test the bounding points and centroid in the xml file
+	vector< vector< double>> test;
+
+	vector<double> numbers;
+	numbers.push_back(5.4444);
+	numbers.push_back(7.555);
+	numbers.push_back(2.4444);
+
+	test.push_back(numbers);
+
+	numbers.clear();
+	numbers.push_back(1.4444);
+	numbers.push_back(2.555);
+	numbers.push_back(3.4444);
+
+	test.push_back(numbers);
+
+	//A dummy feauture to add in the xml file. for testing purposes
+	Feature* ft = new Feature();
+	ft->setName("Testing feature");
+	ft->setBoundingPolygon(test);
+	ft->computeCentroid();
 	
+	//Making the xml file
+	XmlMaker xml;
+	xml.createXMLFile();
+	xml.insertObject(*ft);
+	//trying to insert the same feature twice. It does not do it, which is good
+	if(!xml.findObject(ft->getName()))
+		xml.insertObject(*ft);
+
 	//Centroid stuff
 	
-	XMLSurfaceParser surfaceParser;
+	/*XMLSurfaceParser surfaceParser;
 
 	surfaceParser.setFilePath("../Data/Surface_surfaces.kml");
 	surfaceParser.readFile();
@@ -39,6 +70,7 @@ int main()
 	cout << surfaceParser.getName(1) << endl;
 
 	cout << "name output end" << endl;
+	*/
 	/*
 	XMLDocument doc;
 	doc.LoadFile("../Data/Volume_surfaces.kml");

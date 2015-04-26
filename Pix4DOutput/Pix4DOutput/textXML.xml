@@ -1,0 +1,36 @@
+<objects>
+    <object name="Testing feature">
+        <type>empty</type>
+        <centroid>
+            <latitude>6.888800</latitude>
+            <longitude>10.110000</longitude>
+            <altitude>5.888800</altitude>
+        </centroid>
+        <area>empty</area>
+        <volume>empty</volume>
+        <boundingpoints>
+            <point>
+                <name>placeholder name</name>
+                <coordinates>
+                    <x>5.444400</x>
+                    <y>7.555000</y>
+                    <z>2.444400</z>
+                </coordinates>
+            </point>
+            <point>
+                <name>placeholder name</name>
+                <coordinates>
+                    <x>1.444400</x>
+                    <y>2.555000</y>
+                    <z>3.444400</z>
+                </coordinates>
+            </point>
+        </boundingpoints>
+        <containingimage>
+            <image>empty image</image>
+        </containingimage>
+        <identification>empty5</identification>
+        <state>empty6</state>
+        <qrcode>empty7</qrcode>
+    </object>
+</objects>
