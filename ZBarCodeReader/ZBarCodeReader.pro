@@ -11,14 +11,27 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = ZBarCodeReader
 TEMPLATE = app
 
-LIBS+=ZBar\lib\libzbar-0.lib
+LIBS+=../Pix4DOutput/tinyxml/tinyxml2.lib
+
+#ZBar\lib\libzbar-0.lib  \
+
 
 SOURCES += main.cpp\
         barcodereader.cpp \
-    reportgenerator.cpp
+    reportgenerator.cpp \
+    model.cpp \
+    feature.cpp \
+    pointtoimageparser.cpp \
+    volumefileparser.cpp \
+    xmlsurfaceparser.cpp
 
 HEADERS  += barcodereader.h \
-    reportgenerator.h
+    reportgenerator.h \
+    model.h \
+    feature.h \
+    pointtoimageparser.h \
+    volumefileparser.h \
+    xmlsurfaceparser.h
 
 FORMS    += barcodereader.ui \
     reportgenerator.ui
