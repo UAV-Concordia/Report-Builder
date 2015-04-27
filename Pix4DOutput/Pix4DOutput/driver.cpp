@@ -47,6 +47,20 @@ int main()
 	if(!xml.findObject(ft->getName()))
 		xml.insertObject(*ft);
 
+	test.clear();
+
+	numbers.clear();
+	numbers.push_back(0.4444);
+	numbers.push_back(0.555);
+	numbers.push_back(1.4444);
+	
+	test.push_back(numbers);
+
+	ft->setBoundingPolygon(test);
+	ft->computeCentroid();
+
+	cout << "MODIFYING OBJECT" << endl;
+	xml.updateObject(*ft);
 	//Centroid stuff
 	
 	/*XMLSurfaceParser surfaceParser;
