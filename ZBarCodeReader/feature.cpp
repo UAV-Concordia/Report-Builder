@@ -5,25 +5,34 @@
 Feature::Feature()
 {
     name="";
-    type=NONE;
+    type=NO_FEATURE;
+    objectType=NO_OBJECT;
+    structureState=NO_STRUCTURE;
     area=0.0;
     volume=0.0;
+    qrcode="";
 }
 
 Feature::Feature(string pName)
 {
     name=pName;
-    type=NONE;
+    type=NO_FEATURE;
+    objectType=NO_OBJECT;
+    structureState=NO_STRUCTURE;
     area=0.0;
     volume=0.0;
+    qrcode="";
 }
 
 Feature::Feature(string pName,FeatureType pType)
 {
     name=pName;
     type=pType;
+    objectType=NO_OBJECT;
+    structureState=NO_STRUCTURE;
     area=0.0;
     volume=0.0;
+    qrcode="";
 }
 
 
@@ -75,6 +84,66 @@ void Feature::setType(FeatureType pType){
 }
 
 
+ObjectType Feature::getObjectType()
+{
+    return objectType;
+}
+
+string Feature::getStringObjectType()
+{
+    switch (objectType) {
+    case BOAT:
+        return "Boat";
+        break;
+    case CAR:
+        return "Car";
+        break;
+    case FIRE:
+        return "Fire";
+        break;
+    case TENT:
+        return "Tent";
+        break;
+    default:
+        return "None";
+        break;
+    }
+}
+
+void Feature::setObjectType(ObjectType pObjectType)
+{
+    if (type==OBJECT)
+        objectType=pObjectType;
+}
+
+
+StructureState Feature::getStructureState()
+{
+    return structureState;
+}
+
+string Feature::getStringStructureState()
+{
+    switch (structureState) {
+    case DAMAGED:
+        return "Damaged";
+        break;
+    case UNDAMAGED:
+        return "Undamaged";
+        break;
+    default:
+        return "None";
+        break;
+    }
+}
+
+void Feature::setStructureState(StructureState pState)
+{
+    if (type==STRUCTURE)
+        structureState=pState;
+}
+
+
 double Feature::getArea(){
     return area;
 }
@@ -95,7 +164,16 @@ void Feature::setVolume(double pVolume){
 }
 
 
+string Feature::getQRCode()
+{
+    return qrcode;
+}
 
+void Feature::setQRCode(string pCode)
+{
+    if(type==TRAIN)
+        qrcode=pCode;
+}
 
 void Feature::setBoundingPolygon(vector< vector< double>> pPolygon){
     boundingPolygon = pPolygon;

@@ -1,7 +1,7 @@
 #include "reportgenerator.h"
 #include "ui_reportgenerator.h"
 #include "QFileDialog"
-
+#include "QClipboard"
 
 
 ReportGenerator::ReportGenerator(QWidget *parent) :
@@ -190,4 +190,71 @@ void ReportGenerator::on_featureList_clicked(const QModelIndex &index)
 
     }
 
+}
+
+void ReportGenerator::on_copyToClipboardButton_clicked()
+{
+    QClipboard *clipboard = QApplication::clipboard();
+
+    //Build Excel text according to type
+
+
+
+
+    if(ui->featureList->currentItem()){
+        QListWidgetItem* currentItem=ui->featureList->currentItem();
+        QString featureName=currentItem->text();
+
+        Feature* feature=model->getFeature(featureName.toStdString());
+        QString clipboardText;
+        if(feature){
+            switch (feature->getType()){
+
+            case CONTAMINED_AREA:
+               clipboardText=QString::fromStdString(feature->getName()+"\t");
+               clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(0))+"\t"));
+               clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(1))+"\t"));
+               clipboardText.append(QString::fromStdString(to_string(feature->getArea())+"\t"));
+
+                break;
+            case DEBRIS_PILE:
+                clipboardText=QString::fromStdString(feature->getName()+"\t");
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(0))+"\t"));
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(1))+"\t"));
+                clipboardText.append(QString::fromStdString(to_string(feature->getVolume())+"\t"));
+
+                break;
+            case OBJECT:
+                clipboardText=QString::fromStdString(feature->getName()+"\t");
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(0))+"\t"));
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(1))+"\t"));
+                clipboardText.append(QString::fromStdString(feature->getStringObjectType()+"\t"));
+                break;
+            case PERSON:
+                clipboardText=QString::fromStdString(feature->getName()+"\t");
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(0))+"\t"));
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(1))+"\t"));
+                break;
+            case STRUCTURE:
+                clipboardText=QString::fromStdString(feature->getName()+"\t");
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(0))+"\t"));
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(1))+"\t"));
+                clipboardText.append(QString::fromStdString(feature->getStringStructureState()+"\t"));
+                break;
+            case TRAIN:
+                clipboardText=QString::fromStdString(feature->getName()+"\t");
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(0))+"\t"));
+                clipboardText.append(QString::fromStdString(to_string(feature->getCentroid().at(1))+"\t"));
+                clipboardText.append(QString::fromStdString(feature->getQRCode()+"\t"));
+                break;
+            default:
+                clipboardText=QString::fromStdString("No feature");
+                break;
+
+            }
+        }
+
+
+    clipboard->setText(clipboardText);
+    }
 }

@@ -52,6 +52,7 @@ public:
     QListWidget *imageList;
     QPushButton *pushButton;
     QPushButton *refreshListButton;
+    QPushButton *copyToClipboardButton;
 
     void setupUi(QWidget *ReportGenerator)
     {
@@ -60,7 +61,7 @@ public:
         ReportGenerator->resize(753, 300);
         generateReport = new QPushButton(ReportGenerator);
         generateReport->setObjectName(QStringLiteral("generateReport"));
-        generateReport->setGeometry(QRect(360, 250, 121, 23));
+        generateReport->setGeometry(QRect(360, 270, 121, 23));
         loadObjectFileButton = new QPushButton(ReportGenerator);
         loadObjectFileButton->setObjectName(QStringLiteral("loadObjectFileButton"));
         loadObjectFileButton->setGeometry(QRect(190, 20, 111, 23));
@@ -137,7 +138,10 @@ public:
         pushButton->setGeometry(QRect(100, 180, 141, 23));
         refreshListButton = new QPushButton(ReportGenerator);
         refreshListButton->setObjectName(QStringLiteral("refreshListButton"));
-        refreshListButton->setGeometry(QRect(360, 220, 121, 23));
+        refreshListButton->setGeometry(QRect(360, 210, 121, 23));
+        copyToClipboardButton = new QPushButton(ReportGenerator);
+        copyToClipboardButton->setObjectName(QStringLiteral("copyToClipboardButton"));
+        copyToClipboardButton->setGeometry(QRect(360, 240, 121, 23));
 
         retranslateUi(ReportGenerator);
 
@@ -165,6 +169,7 @@ public:
         label_6->setText(QApplication::translate("ReportGenerator", "Image List", 0));
         pushButton->setText(QApplication::translate("ReportGenerator", "Update Database", 0));
         refreshListButton->setText(QApplication::translate("ReportGenerator", "Refresh List", 0));
+        copyToClipboardButton->setText(QApplication::translate("ReportGenerator", "Copy to Clipboard", 0));
     } // retranslateUi
 
 };

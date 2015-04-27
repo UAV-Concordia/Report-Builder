@@ -8,6 +8,14 @@
 
 using namespace std;
 
+
+enum StructureState{
+    DAMAGED,
+    UNDAMAGED,
+    NO_STRUCTURE
+};
+
+
 enum FeatureType{
     CONTAMINED_AREA,
     TRAIN,
@@ -15,7 +23,15 @@ enum FeatureType{
     OBJECT,
     STRUCTURE,
     DEBRIS_PILE,
-    NONE
+    NO_FEATURE
+};
+
+enum ObjectType{
+    FIRE,
+    TENT,
+    BOAT,
+    CAR,
+    NO_OBJECT
 };
 
 class Feature
@@ -30,6 +46,14 @@ public:
     string getStringType();
     void setType(FeatureType);
 
+    ObjectType getObjectType();
+    string getStringObjectType();
+    void setObjectType(ObjectType);
+
+    StructureState getStructureState();
+    string getStringStructureState();
+    void setStructureState(StructureState);
+
     string getName();
     void setName(string);
 
@@ -38,6 +62,9 @@ public:
 
     double getVolume();
     void setVolume(double);
+
+    string getQRCode();
+    void setQRCode(string);
 
     void setBoundingPolygon(vector< vector< double>>);
     vector< vector< double>>& getBoundingPolygon();
@@ -51,7 +78,9 @@ private:
     FeatureType type;
     double area;
     double volume;
-
+    string qrcode;
+    ObjectType objectType;
+    StructureState structureState;
     vector< vector< double>> boundingPolygon;
     vector< double > centroid;
 
