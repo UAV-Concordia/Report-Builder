@@ -67,6 +67,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Visual Studio 2013\Projects\Pix4DOutput\Pix4DOutput\PointToImageParser.cpp" />
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="ContaminatedField.cpp" />
     <ClCompile Include="DebrisPile.cpp" />
@@ -79,6 +80,7 @@
     <ClCompile Include="XMLSurfaceParser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Visual Studio 2013\Projects\Pix4DOutput\Pix4DOutput\PointToImageParser.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="ContaminatedField.h" />
     <ClInclude Include="DebrisPile.h" />
