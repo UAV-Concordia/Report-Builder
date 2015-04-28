@@ -45,6 +45,8 @@ private slots:
 
     void on_copyToClipboardButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::ReportGenerator *ui;
     QTextDocument * const m_document;

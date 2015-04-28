@@ -21,6 +21,10 @@ public:
      void setSurfaceFile(string filename);
      void setVolumeFile(string filename);
 
+     //Parse data
+     void parseData();
+
+
     vector<string> getFeatureNames();
     Feature* getFeature(string);
 

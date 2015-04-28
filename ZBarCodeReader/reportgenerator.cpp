@@ -258,3 +258,13 @@ void ReportGenerator::on_copyToClipboardButton_clicked()
     clipboard->setText(clipboardText);
     }
 }
+
+void ReportGenerator::on_pushButton_clicked()
+{
+    if (!ui->objectFileLineEdit->text().trimmed().isEmpty()){
+        qDebug() << "Parsing Data";
+        model->parseData();
+
+    }
+
+}

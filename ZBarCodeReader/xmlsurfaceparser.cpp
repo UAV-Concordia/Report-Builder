@@ -13,7 +13,7 @@ void XMLSurfaceParser::setFilePath(string path){
     filePath = path;
 }
 
-string XMLSurfaceParser::getFilepath(string path){
+string XMLSurfaceParser::getFilepath(){
     return filePath;
 }
 
@@ -90,6 +90,11 @@ string XMLSurfaceParser::getName(int index){
 
     return name;
 }
+
+  int XMLSurfaceParser::getNumberOfParsedObjects()
+  {
+      return placemarkElements.size();
+  }
 
 
 vector<string>& XMLSurfaceParser::split(char delim, string toParse, int rep){

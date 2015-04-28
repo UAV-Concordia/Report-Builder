@@ -58,7 +58,7 @@ public:
     {
         if (ReportGenerator->objectName().isEmpty())
             ReportGenerator->setObjectName(QStringLiteral("ReportGenerator"));
-        ReportGenerator->resize(753, 300);
+        ReportGenerator->resize(769, 314);
         generateReport = new QPushButton(ReportGenerator);
         generateReport->setObjectName(QStringLiteral("generateReport"));
         generateReport->setGeometry(QRect(360, 270, 121, 23));
@@ -96,43 +96,43 @@ public:
         featureList->setGeometry(QRect(350, 10, 131, 192));
         featureNameLineEdit = new QLineEdit(ReportGenerator);
         featureNameLineEdit->setObjectName(QStringLiteral("featureNameLineEdit"));
-        featureNameLineEdit->setGeometry(QRect(600, 20, 113, 20));
+        featureNameLineEdit->setGeometry(QRect(630, 20, 113, 20));
         label = new QLabel(ReportGenerator);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(500, 20, 47, 13));
         featureTypeLineEdit = new QLineEdit(ReportGenerator);
         featureTypeLineEdit->setObjectName(QStringLiteral("featureTypeLineEdit"));
-        featureTypeLineEdit->setGeometry(QRect(600, 50, 113, 20));
+        featureTypeLineEdit->setGeometry(QRect(630, 50, 113, 20));
         label_2 = new QLabel(ReportGenerator);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(500, 50, 47, 13));
         label_3 = new QLabel(ReportGenerator);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(500, 80, 47, 13));
+        label_3->setGeometry(QRect(500, 80, 101, 16));
         featureCentroidLatLineEdit = new QLineEdit(ReportGenerator);
         featureCentroidLatLineEdit->setObjectName(QStringLiteral("featureCentroidLatLineEdit"));
-        featureCentroidLatLineEdit->setGeometry(QRect(580, 80, 71, 20));
+        featureCentroidLatLineEdit->setGeometry(QRect(690, 80, 71, 20));
         featureCentroidLonLineEdit = new QLineEdit(ReportGenerator);
         featureCentroidLonLineEdit->setObjectName(QStringLiteral("featureCentroidLonLineEdit"));
-        featureCentroidLonLineEdit->setGeometry(QRect(660, 80, 71, 20));
+        featureCentroidLonLineEdit->setGeometry(QRect(610, 80, 71, 20));
         label_4 = new QLabel(ReportGenerator);
         label_4->setObjectName(QStringLiteral("label_4"));
         label_4->setGeometry(QRect(500, 110, 47, 13));
         featureAreaLineEdit = new QLineEdit(ReportGenerator);
         featureAreaLineEdit->setObjectName(QStringLiteral("featureAreaLineEdit"));
-        featureAreaLineEdit->setGeometry(QRect(600, 110, 113, 20));
+        featureAreaLineEdit->setGeometry(QRect(630, 110, 113, 20));
         label_5 = new QLabel(ReportGenerator);
         label_5->setObjectName(QStringLiteral("label_5"));
         label_5->setGeometry(QRect(500, 140, 47, 13));
         featureVolumeLineEdit = new QLineEdit(ReportGenerator);
         featureVolumeLineEdit->setObjectName(QStringLiteral("featureVolumeLineEdit"));
-        featureVolumeLineEdit->setGeometry(QRect(600, 140, 113, 20));
+        featureVolumeLineEdit->setGeometry(QRect(630, 140, 113, 20));
         label_6 = new QLabel(ReportGenerator);
         label_6->setObjectName(QStringLiteral("label_6"));
         label_6->setGeometry(QRect(500, 210, 81, 16));
         imageList = new QListWidget(ReportGenerator);
         imageList->setObjectName(QStringLiteral("imageList"));
-        imageList->setGeometry(QRect(580, 170, 151, 111));
+        imageList->setGeometry(QRect(610, 170, 151, 111));
         pushButton = new QPushButton(ReportGenerator);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(100, 180, 141, 23));
@@ -159,7 +159,7 @@ public:
         label->setText(QApplication::translate("ReportGenerator", "Name", 0));
         featureTypeLineEdit->setText(QString());
         label_2->setText(QApplication::translate("ReportGenerator", "Type", 0));
-        label_3->setText(QApplication::translate("ReportGenerator", "Centroid", 0));
+        label_3->setText(QApplication::translate("ReportGenerator", "Centroid (Lon/Lat)", 0));
         featureCentroidLatLineEdit->setText(QString());
         featureCentroidLonLineEdit->setText(QString());
         label_4->setText(QApplication::translate("ReportGenerator", "Area", 0));
@@ -167,7 +167,7 @@ public:
         label_5->setText(QApplication::translate("ReportGenerator", "Volume", 0));
         featureVolumeLineEdit->setText(QString());
         label_6->setText(QApplication::translate("ReportGenerator", "Image List", 0));
-        pushButton->setText(QApplication::translate("ReportGenerator", "Update Database", 0));
+        pushButton->setText(QApplication::translate("ReportGenerator", "Parse Data", 0));
         refreshListButton->setText(QApplication::translate("ReportGenerator", "Refresh List", 0));
         copyToClipboardButton->setText(QApplication::translate("ReportGenerator", "Copy to Clipboard", 0));
     } // retranslateUi

@@ -149,7 +149,7 @@ double Feature::getArea(){
 }
 
 void Feature::setArea(double pArea){
-    if (type==CONTAMINED_AREA)
+    if (type==CONTAMINED_AREA || type==NO_FEATURE)
          area=pArea;
 }
 
@@ -159,7 +159,7 @@ double Feature::getVolume(){
 }
 
 void Feature::setVolume(double pVolume){
-    if(type==DEBRIS_PILE)
+    if(type==DEBRIS_PILE || type==NO_FEATURE)
         volume=pVolume;
 }
 
@@ -195,9 +195,10 @@ void Feature::computeCentroid(){
     }
 
     if (boundingPolygon.size() != 0){
-        xPos / boundingPolygon.size();
-        yPos / boundingPolygon.size();
-        zPos / boundingPolygon.size();
+        xPos = xPos / boundingPolygon.size();
+        yPos = yPos / boundingPolygon.size();
+        zPos = zPos / boundingPolygon.size();
+
     }
 
     /*centroid.at(0) = xPos;
@@ -207,6 +208,17 @@ void Feature::computeCentroid(){
     centroid.push_back(xPos);
     centroid.push_back(yPos);
     centroid.push_back(zPos);
+
+
+    std::cout << "Centroid" << std::endl;
+    std::cout << centroid.at(0);
+    std::cout << ", ";
+    std::cout << centroid.at(1);
+    std::cout << ", ";
+    std::cout << centroid.at(2);
+
+
+
 }
 
 

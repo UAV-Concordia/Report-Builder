@@ -19,11 +19,13 @@ public:
 
     void readFile();
     void setFilePath(string path);
-    string getFilepath(string path);
+    string getFilepath();
     void parse();
     //vector<string>& split(char delim, string toParse, int rep = 0);
     vector< vector <double>>& getBoundingPolygon(int index);
     string getName(int index);
+
+    int getNumberOfParsedObjects();
 
 private:
     //vector<string> flds;
