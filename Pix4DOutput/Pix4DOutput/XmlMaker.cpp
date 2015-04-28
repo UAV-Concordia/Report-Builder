@@ -30,23 +30,37 @@ void XmlMaker::createXMLFile()
 	//delete &element;
 }
 
-void XmlMaker::insertObject(Feature obj)
+void XmlMaker::updateObject(Feature obj)
 {
 	doc.LoadFile("textXML.xml");
 
-	XMLElement* element = doc.NewElement("object");
+	XMLElement* rootElement = doc.RootElement();
+	XMLElement* documentElement = rootElement->FirstChildElement();
+	//XMLElement* folderElement = documentElement->FirstChildElement();
 
-	//cout << doc.FirstChildElement()->Name();
+	for (XMLElement* child = documentElement; child != NULL; child = child->NextSiblingElement())
+	{
+		if (obj.getName().compare(child->Attribute("name")) == 0)
+		{
+			cout << "found object: " << obj.getName() << endl << "modifying object!" << endl;
+			
+			child->DeleteChildren();
 
-	//add real name of object 
-	element->SetAttribute("name" , obj.getName().c_str());
-
-	//XMLElement* innerElement = doc.NewElement("name");
-	//XMLText* txt = doc.NewText("empty1");
-	//innerElement->LinkEndChild(txt);
-
-	//element->LinkEndChild(innerElement);
+			XmlMaker::writeObject(obj, child);
 	
+			//doc.FirstChildElement()->LinkEndChild(element);
+
+			doc.SaveFile("textXML.xml");
+
+			return;
+		}
+	}
+
+	cout << "no object found to modify!" << endl;
+}
+
+void XmlMaker::writeObject(Feature obj, XMLElement* element)
+{
 	XMLElement* innerElement = doc.NewElement("type");
 	XMLText* txt = doc.NewText("empty");
 	innerElement->LinkEndChild(txt);
@@ -59,7 +73,7 @@ void XmlMaker::insertObject(Feature obj)
 	txt = doc.NewText(std::to_string(obj.getCentroid().at(0)).c_str());
 	centroid->LinkEndChild(txt);
 	innerElement->LinkEndChild(centroid);
-	
+
 	centroid = doc.NewElement("longitude");
 	txt = doc.NewText(std::to_string(obj.getCentroid().at(1)).c_str());
 	centroid->LinkEndChild(txt);
@@ -76,7 +90,7 @@ void XmlMaker::insertObject(Feature obj)
 	innerElement = doc.NewElement("area");
 	txt = doc.NewText("empty");
 	innerElement->LinkEndChild(txt);
-	
+
 	element->LinkEndChild(innerElement);
 
 	innerElement = doc.NewElement("volume");
@@ -88,23 +102,23 @@ void XmlMaker::insertObject(Feature obj)
 	//boundingpoints tag
 	innerElement = doc.NewElement("boundingpoints");
 
-	
+
 	for (int i = 0; i < obj.getBoundingPolygon().size(); i++){
-		
+
 		XMLElement* point = doc.NewElement("point");
 		XMLElement* pointName = doc.NewElement("name");
 		txt = doc.NewText("placeholder name");
 		pointName->LinkEndChild(txt);
 		point->LinkEndChild(pointName);
 
-	
+
 		XMLElement* coordinates = doc.NewElement("coordinates");
 
 		double xPos = 0;
 		double yPos = 0;
 		double zPos = 0;
 
-			
+
 		xPos += obj.getBoundingPolygon().at(i).at(0);
 		yPos += obj.getBoundingPolygon().at(i).at(1);
 		zPos += obj.getBoundingPolygon().at(i).at(2);
@@ -127,20 +141,20 @@ void XmlMaker::insertObject(Feature obj)
 		point->LinkEndChild(coordinates);
 		innerElement->LinkEndChild(point);
 	}
-	
+
 	element->LinkEndChild(innerElement);
 	//------------------------
-	
+
 	//containingImage tag
 	innerElement = doc.NewElement("containingimage");
 
-		//TODO: for each image we should do this
-		XMLElement* img = doc.NewElement("image");
-		txt = doc.NewText("empty image");
-		img->LinkEndChild(txt);
+	//TODO: for each image we should do this
+	XMLElement* img = doc.NewElement("image");
+	txt = doc.NewText("empty image");
+	img->LinkEndChild(txt);
 
-		innerElement->LinkEndChild(img);
-		//------------------------------------
+	innerElement->LinkEndChild(img);
+	//------------------------------------
 
 	element->LinkEndChild(innerElement);
 	//-------------------------
@@ -162,6 +176,25 @@ void XmlMaker::insertObject(Feature obj)
 	innerElement->LinkEndChild(txt);
 
 	element->LinkEndChild(innerElement);
+}
+void XmlMaker::insertObject(Feature obj)
+{
+	doc.LoadFile("textXML.xml");
+
+	XMLElement* element = doc.NewElement("object");
+
+	//cout << doc.FirstChildElement()->Name();
+
+	//add real name of object 
+	element->SetAttribute("name" , obj.getName().c_str());
+
+	//XMLElement* innerElement = doc.NewElement("name");
+	//XMLText* txt = doc.NewText("empty1");
+	//innerElement->LinkEndChild(txt);
+
+	//element->LinkEndChild(innerElement);
+	
+	XmlMaker::writeObject(obj, element);
 
 	doc.FirstChildElement()->LinkEndChild(element);
 

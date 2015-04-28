@@ -17,15 +17,14 @@ public:
 
 	void createXMLFile();
 	void insertObject(Feature obj);
-	void updateObject();
+	void updateObject(Feature obj);
 	bool findObject(string name);
 
 private:
 	string filePath; // not used so far
 	XMLDocument doc;
-	XMLElement* rootElement;
-	XMLElement* documentElement;
-	XMLElement* folderElement;
 	vector<XMLElement*> placemarkElements;
+
+	void writeObject(Feature obj, XMLElement* element);
 };
 
