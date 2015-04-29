@@ -19,8 +19,11 @@ string XMLSurfaceParser::getFilepath(){
 
 
 void XMLSurfaceParser::readFile(){
-    if (!filePath.empty())
-        doc.LoadFile(filePath.c_str());
+    if (!filePath.empty()){
+         doc.Clear();
+         doc.LoadFile(filePath.c_str());
+    }
+
 }
 
 

@@ -47,6 +47,14 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_featureTypeComboBox_activated(const QString &arg1);
+
+    void on_structureStateComboBox_activated(const QString &arg1);
+
+    void on_objectTypeComboBox_activated(const QString &arg1);
+
+    void on_featureBarCodeLineEdit_editingFinished();
+
 private:
     Ui::ReportGenerator *ui;
     QTextDocument * const m_document;
@@ -54,6 +62,8 @@ private:
 
     Model *model;
 
+
+    void displayFeature();
 };
 
 #endif // REPORTGENERATOR_H

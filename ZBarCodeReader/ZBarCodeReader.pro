@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     feature.cpp \
     pointtoimageparser.cpp \
     volumefileparser.cpp \
-    xmlsurfaceparser.cpp
+    xmlsurfaceparser.cpp \
+    xmlverticesparser.cpp
 
 HEADERS  += barcodereader.h \
     reportgenerator.h \
@@ -31,7 +32,8 @@ HEADERS  += barcodereader.h \
     feature.h \
     pointtoimageparser.h \
     volumefileparser.h \
-    xmlsurfaceparser.h
+    xmlsurfaceparser.h \
+    xmlverticesparser.h
 
 FORMS    += barcodereader.ui \
     reportgenerator.ui

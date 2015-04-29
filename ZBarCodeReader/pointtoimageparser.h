@@ -13,6 +13,14 @@
 
 using namespace std;
 
+
+struct MapPoint{
+    string name;
+    double xPixel;
+    double yPixel;
+
+};
+
 class PointToImageParser
 {
 
@@ -28,7 +36,11 @@ public:
     void parse();
     vector<string>& readFile();
     void setFilePath(string path);
-    string getFilepath(string path);
+    string getFilepath();
+
+
+    const std::unordered_map<std::string, std::vector<MapPoint> >& getMapPoint();
+
 
     vector<string>& split(char delim, string toParse, int rep = 0);
 
@@ -36,16 +48,11 @@ private:
     vector<string> flds;
     vector<string> lines;
     string filePath;
-
+    std::unordered_map<std::string, std::vector<MapPoint> > pointMap;
     bool isInteger(const std::string & s);
 };
 
-struct MapPoint{
-    string name;
-    double xPixel;
-    double yPixel;
 
-};
 
 
 #endif // POINTTOIMAGEPARSER_H

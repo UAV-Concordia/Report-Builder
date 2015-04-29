@@ -8,6 +8,11 @@
 
 using namespace std;
 
+struct BoundingPoint{
+    string name;
+    vector<double> coordinates;
+    vector<string> imagePaths;
+};
 
 enum StructureState{
     DAMAGED,
@@ -66,8 +71,15 @@ public:
     string getQRCode();
     void setQRCode(string);
 
+     void setBoundingPoints(vector< BoundingPoint>);
+      vector< BoundingPoint>& getBoundingPoints();
     void setBoundingPolygon(vector< vector< double>>);
     vector< vector< double>>& getBoundingPolygon();
+
+
+    void addImagePath(string,string);
+
+    const vector<string> getImagePaths();
 
     void computeCentroid();
     vector< double > getCentroid();
@@ -81,6 +93,7 @@ private:
     string qrcode;
     ObjectType objectType;
     StructureState structureState;
+    vector<BoundingPoint> boundingPoints;
     vector< vector< double>> boundingPolygon;
     vector< double > centroid;
 

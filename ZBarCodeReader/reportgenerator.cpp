@@ -150,7 +150,12 @@ void ReportGenerator::on_refreshListButton_clicked()
 
 void ReportGenerator::on_featureList_clicked(const QModelIndex &index)
 {
+   displayFeature();
+}
+
+void ReportGenerator::displayFeature(){
     if(ui->featureList->currentItem()){
+        QPalette *palette = new QPalette();
         QListWidgetItem* currentItem=ui->featureList->currentItem();
         QString featureName=currentItem->text();
 
@@ -161,36 +166,205 @@ void ReportGenerator::on_featureList_clicked(const QModelIndex &index)
              QString featureName = QString::fromStdString(feature->getName());
             ui->featureNameLineEdit->setText(featureName);
 
+            ui->featureNameLineEdit->setReadOnly(true);
+
+
+            palette->setColor(QPalette::Base,Qt::gray);
+            palette->setColor(QPalette::Text,Qt::black);
+            ui->featureNameLineEdit->setPalette(*palette);
+
+
+
             //Display type
             QString featureType = QString::fromStdString(feature->getStringType());
-            ui->featureTypeLineEdit->setText(featureType);
+
+            int featureTypeIndex = -1;
+
+            if (featureType==QString("Contaminated Area"))
+                    featureTypeIndex =  ui->featureTypeComboBox->findText(QString("CONTAMINED_AREA"));
+            else if (featureType==QString("Debris Pile"))
+                     featureTypeIndex =  ui->featureTypeComboBox->findText(QString("DEBRIS_PILE"));
+            else if (featureType==QString("Object"))
+                     featureTypeIndex =  ui->featureTypeComboBox->findText(QString("OBJECT"));
+            else if (featureType==QString("Person"))
+                     featureTypeIndex =  ui->featureTypeComboBox->findText(QString("PERSON"));
+            else if (featureType==QString("Structure"))
+                     featureTypeIndex =  ui->featureTypeComboBox->findText(QString("STRUCTURE"));
+            else if (featureType==QString("Train"))
+                     featureTypeIndex =  ui->featureTypeComboBox->findText(QString("TRAIN"));
+            else
+                featureTypeIndex=-1;
+
+            if ( featureTypeIndex != -1 ) { // -1 for not found
+                qDebug() << "found";
+               ui->featureTypeComboBox->setCurrentIndex(featureTypeIndex);
+            }else{
+                qDebug() << "not found";
+                ui->featureTypeComboBox->setCurrentIndex(0);
+            }
+
+            //Display Structure State
+
+             if (featureType==QString("Structure")){
+                QString structureState = QString::fromStdString(feature->getStringStructureState());
+                int structureStateIndex = -1;
+
+                if (structureState==QString("Damaged"))
+                    structureStateIndex =  ui->structureStateComboBox->findText(QString("DAMAGED"));
+                else if (structureState==QString("Undamaged"))
+                    structureStateIndex =  ui->structureStateComboBox->findText(QString("UNDAMAGED"));
+                else
+                    structureStateIndex=-1;
+
+                if ( structureStateIndex != -1 ) { // -1 for not found
+                    qDebug() << "found";
+                   ui->structureStateComboBox->setCurrentIndex(structureStateIndex);
+                }else{
+                    qDebug() << "not found";
+                    ui->structureStateComboBox->setCurrentIndex(0) ;
+                }
+                 ui->structureStateComboBox->setEnabled(true);
+             }else{
+                  ui->structureStateComboBox->setCurrentIndex(0);
+                  ui->structureStateComboBox->setEnabled(false);
+             }
+
+             //Display object type
+
+             if (featureType==QString("Object")){
+                QString objectType = QString::fromStdString(feature->getStringObjectType());
+                int objectTypeIndex = -1;
+
+                if (objectType==QString("Boat"))
+                    objectTypeIndex =  ui->objectTypeComboBox->findText(QString("BOAT"));
+                else if (objectType==QString("Car"))
+                    objectTypeIndex =  ui->objectTypeComboBox->findText(QString("CAR"));
+                else if (objectType==QString("Fire"))
+                    objectTypeIndex =  ui->objectTypeComboBox->findText(QString("FIRE"));
+                else if (objectType==QString("Tent"))
+                    objectTypeIndex =  ui->objectTypeComboBox->findText(QString("TENT"));
+                else
+                    objectTypeIndex=-1;
+
+                if ( objectTypeIndex != -1 ) { // -1 for not found
+                    qDebug() << "found";
+                   ui->objectTypeComboBox->setCurrentIndex(objectTypeIndex);
+                }else{
+                    qDebug() << "not found";
+                    ui->objectTypeComboBox->setCurrentIndex(0) ;
+                }
+
+                 ui->objectTypeComboBox->setEnabled(true);
+
+             }else{
+                  ui->objectTypeComboBox->setCurrentIndex(0);
+                  ui->objectTypeComboBox->setEnabled(false);
+             }
+
+            //Display Barcode
+             if (featureType==QString("Train")){
+                 QString featureBarCode = QString::fromStdString(feature->getQRCode());
+                 ui->featureBarCodeLineEdit->setText(featureBarCode);
+
+
+                 ui->featureBarCodeLineEdit->setReadOnly(false);
+                 palette->setColor(QPalette::Base,Qt::white);
+                 palette->setColor(QPalette::Text,Qt::black);
+                 ui->featureBarCodeLineEdit->setPalette(*palette);
+
+
+             }else{
+                  ui->featureBarCodeLineEdit->setText(QString::fromStdString(""));
+                  ui->featureBarCodeLineEdit->setReadOnly(true);
+
+
+                  palette->setColor(QPalette::Base,Qt::gray);
+                  palette->setColor(QPalette::Text,Qt::black);
+                  ui->featureBarCodeLineEdit->setPalette(*palette);
+             }
 
             //Display Centroid
             vector<double> centroid=feature->getCentroid();
             QString featureCentroidLon = QString::fromStdString(to_string(centroid.at(0)));
             ui->featureCentroidLonLineEdit->setText(featureCentroidLon);
 
+            ui->featureCentroidLonLineEdit->setReadOnly(true);
+
+            palette->setColor(QPalette::Base,Qt::gray);
+            palette->setColor(QPalette::Text,Qt::black);
+            ui->featureCentroidLonLineEdit->setPalette(*palette);
+
+
             QString featureCentroidLat = QString::fromStdString(to_string(centroid.at(1)));
             ui->featureCentroidLatLineEdit->setText(featureCentroidLat);
+
+            ui->featureCentroidLatLineEdit->setReadOnly(true);
+
+            palette->setColor(QPalette::Base,Qt::gray);
+            palette->setColor(QPalette::Text,Qt::black);
+            ui->featureCentroidLatLineEdit->setPalette(*palette);
 
 
             //Display area
             QString featureArea = QString::fromStdString(to_string(feature->getArea()));
             ui->featureAreaLineEdit->setText(featureArea);
 
+            ui->featureAreaLineEdit->setReadOnly(true);
+
+            palette->setColor(QPalette::Base,Qt::gray);
+            palette->setColor(QPalette::Text,Qt::black);
+            ui->featureAreaLineEdit->setPalette(*palette);
+
+
             //Display volume
 
             QString featureVolume = QString::fromStdString(to_string(feature->getVolume()));
             ui->featureVolumeLineEdit->setText(featureVolume);
 
+
+            ui->featureVolumeLineEdit->setReadOnly(true);
+
+            palette->setColor(QPalette::Base,Qt::gray);
+            palette->setColor(QPalette::Text,Qt::black);
+            ui->featureVolumeLineEdit->setPalette(*palette);
+
+
+            //Display bounding points
+            //Clear bounding points list
+            ui->boundingPointList->clear();
+
+           vector<BoundingPoint> boundingPoints=feature->getBoundingPoints();
+
+            for(BoundingPoint x:boundingPoints){
+
+                QString qstr = QString::fromStdString(x.name);
+                 qDebug() << qstr;
+                 ui->boundingPointList->addItem(qstr);
+            }
+
+            //Display image
+            //Clear image list
+             ui->imageList->clear();
+
+             vector<string> images=feature->getImagePaths();
+
+             for(string x: images){
+
+                 QString qstr = QString::fromStdString(x);
+                  qDebug() << qstr;
+                  ui->imageList->addItem(qstr);
+             }
+
             //Display anything else
+
+
 
         }
 
 
     }
-
 }
+
 
 void ReportGenerator::on_copyToClipboardButton_clicked()
 {
@@ -266,5 +440,118 @@ void ReportGenerator::on_pushButton_clicked()
         model->parseData();
 
     }
+
+}
+
+void ReportGenerator::on_featureTypeComboBox_activated(const QString &featureType)
+{
+    qDebug() << "type chosen" << featureType;
+    //Save new Type
+
+    QListWidgetItem* currentItem=ui->featureList->currentItem();
+    QString featureName=currentItem->text();
+
+    Feature* feature=model->getFeature(featureName.toStdString());
+
+    if(feature){
+
+        if (featureType==QString("CONTAMINED_AREA"))
+                feature->setType(CONTAMINED_AREA);
+        else if (featureType==QString("DEBRIS_PILE"))
+                  feature->setType(DEBRIS_PILE);
+        else if (featureType==QString("OBJECT"))
+                 feature->setType(OBJECT);
+        else if (featureType==QString("PERSON"))
+                  feature->setType(PERSON);
+        else if (featureType==QString("STRUCTURE"))
+                 feature->setType(STRUCTURE);
+        else if (featureType==QString("TRAIN"))
+                feature->setType(TRAIN);
+        else
+                feature->setType(NO_FEATURE);
+
+
+        displayFeature();
+    }
+
+
+}
+
+void ReportGenerator::on_structureStateComboBox_activated(const QString &structureState)
+{
+
+    qDebug() << "structure state chosen" << structureState;
+    //Save new Type
+
+    QListWidgetItem* currentItem=ui->featureList->currentItem();
+    QString featureName=currentItem->text();
+
+    Feature* feature=model->getFeature(featureName.toStdString());
+
+    if(feature){
+
+        if (structureState==QString("DAMAGED"))
+                feature->setStructureState(DAMAGED);
+        else if (structureState==QString("UNDAMAGED"))
+                  feature->setStructureState(UNDAMAGED);
+        else
+                feature->setStructureState(NO_STRUCTURE);
+
+
+        displayFeature();
+    }
+
+
+
+
+}
+
+void ReportGenerator::on_objectTypeComboBox_activated(const QString &objectType)
+{
+
+    qDebug() << "object type chosen" << objectType;
+    //Save new Type
+
+    QListWidgetItem* currentItem=ui->featureList->currentItem();
+    QString featureName=currentItem->text();
+
+    Feature* feature=model->getFeature(featureName.toStdString());
+
+    if(feature){
+
+        if (objectType==QString("BOAT"))
+                feature->setObjectType(BOAT);
+        else if (objectType==QString("CAR"))
+                  feature->setObjectType(CAR);
+        else if (objectType==QString("FIRE"))
+                  feature->setObjectType(FIRE);
+        else if (objectType==QString("TENT"))
+                  feature->setObjectType(TENT);
+        else
+                feature->setObjectType(NO_OBJECT);
+
+
+        displayFeature();
+    }
+
+
+}
+
+void ReportGenerator::on_featureBarCodeLineEdit_editingFinished()
+{
+    qDebug() << "editing finished" ;
+
+    QListWidgetItem* currentItem=ui->featureList->currentItem();
+    QString featureName=currentItem->text();
+
+    Feature* feature=model->getFeature(featureName.toStdString());
+
+    if(feature){
+       QString barCode= ui->featureBarCodeLineEdit->text();
+       feature->setQRCode(barCode.toStdString());
+
+        displayFeature();
+    }
+
 
 }

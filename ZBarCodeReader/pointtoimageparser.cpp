@@ -41,9 +41,15 @@ void PointToImageParser::setFilePath(string path){
     filePath = path;
 }
 
-string PointToImageParser::getFilepath(string path){
+string PointToImageParser::getFilepath(){
     return filePath;
 }
+
+const std::unordered_map<std::string, std::vector<MapPoint>>& PointToImageParser::getMapPoint()
+{
+    return pointMap;
+}
+
 
 
 vector<string>& PointToImageParser::split(char delim, string toParse, int rep){
@@ -78,13 +84,17 @@ vector<string>& PointToImageParser::split(char delim, string toParse, int rep){
 
 void PointToImageParser::parse(){
 
+
+    pointMap.clear();
+
     //booleans
     bool image = true;
 
 
     //Group by image
     MapPoint point;
-    std::unordered_map<std::string, std::vector<MapPoint> > pointMap;
+
+
     string currentImage="";
 
     //split('\n',)
@@ -117,16 +127,13 @@ void PointToImageParser::parse(){
             else
             {
 
-
                 cout << "point" << endl;
-
-
 
                 vector<string> pointInfo = split(' ', line, 0);
 
                 point.name = pointInfo.at(0);
-                point.xPixel = stold(pointInfo.at(1));
-                point.yPixel = stold(pointInfo.at(2));
+                point.xPixel = stold(pointInfo.at(1))*MM_TO_PIXEL_RATIO;
+                point.yPixel = stold(pointInfo.at(2))*MM_TO_PIXEL_RATIO;
 
 
                 //vector<MapPoint> pointList = pointMap[currentImage];

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Folder><name>points</name>
+  <Placemark>
+	<name>mtp74</name>
+      <Point><coordinates>8.025631363055512,46.341594843688092,762.52243041992187</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>mtp75</name>
+      <Point><coordinates>8.025820604164826,46.341363619320092,759.88723754882812</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>mtp76</name>
+      <Point><coordinates>8.025567918485418,46.341252264474015,761.97610473632812</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>mtp77</name>
+      <Point><coordinates>8.025383871662079,46.341418833568184,760.79927062988281</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>mtp78</name>
+      <Point><coordinates>8.02541015771846,46.341573262031531,761.52005004882812</coordinates></Point>
+  </Placemark>
+  <Placemark>
+	<name>mtp78</name>
+      <Point><coordinates>8.02541015771846,46.341573262031531,761.52005004882812</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

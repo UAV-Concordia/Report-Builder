@@ -6,8 +6,8 @@
 #include "feature.h"
 #include "pointtoimageparser.h"
 #include "volumefileparser.h"
-#include "xmlsurfaceparser.h"
 
+#include "xmlverticesparser.h"
 
 class Model
 {
@@ -33,7 +33,8 @@ private:
     PointToImageParser pti_parser;
     VolumeFileParser volume_parser;
     VolumeFileParser surface_parser;
-    XMLSurfaceParser object_parser;
+    //XMLSurfaceParser object_parser;
+    XMLVerticesParser object_parser;
 
    unordered_map<string,Feature> features;
 

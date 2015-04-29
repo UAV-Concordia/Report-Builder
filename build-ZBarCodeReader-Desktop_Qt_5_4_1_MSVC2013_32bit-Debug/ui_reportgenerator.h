@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -39,8 +40,6 @@ public:
     QListWidget *featureList;
     QLineEdit *featureNameLineEdit;
     QLabel *label;
-    QLineEdit *featureTypeLineEdit;
-    QLabel *label_2;
     QLabel *label_3;
     QLineEdit *featureCentroidLatLineEdit;
     QLineEdit *featureCentroidLonLineEdit;
@@ -48,20 +47,31 @@ public:
     QLineEdit *featureAreaLineEdit;
     QLabel *label_5;
     QLineEdit *featureVolumeLineEdit;
-    QLabel *label_6;
-    QListWidget *imageList;
     QPushButton *pushButton;
     QPushButton *refreshListButton;
     QPushButton *copyToClipboardButton;
+    QLabel *label_7;
+    QLabel *label_8;
+    QLabel *label_9;
+    QComboBox *featureTypeComboBox;
+    QComboBox *structureStateComboBox;
+    QComboBox *objectTypeComboBox;
+    QFrame *line_2;
+    QListWidget *imageList;
+    QLabel *label_10;
+    QLineEdit *featureBarCodeLineEdit;
+    QLabel *label_6;
+    QListWidget *boundingPointList;
+    QLabel *label_11;
 
     void setupUi(QWidget *ReportGenerator)
     {
         if (ReportGenerator->objectName().isEmpty())
             ReportGenerator->setObjectName(QStringLiteral("ReportGenerator"));
-        ReportGenerator->resize(769, 314);
+        ReportGenerator->resize(769, 603);
         generateReport = new QPushButton(ReportGenerator);
         generateReport->setObjectName(QStringLiteral("generateReport"));
-        generateReport->setGeometry(QRect(360, 270, 121, 23));
+        generateReport->setGeometry(QRect(110, 240, 121, 23));
         loadObjectFileButton = new QPushButton(ReportGenerator);
         loadObjectFileButton->setObjectName(QStringLiteral("loadObjectFileButton"));
         loadObjectFileButton->setGeometry(QRect(190, 20, 111, 23));
@@ -100,39 +110,27 @@ public:
         label = new QLabel(ReportGenerator);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(500, 20, 47, 13));
-        featureTypeLineEdit = new QLineEdit(ReportGenerator);
-        featureTypeLineEdit->setObjectName(QStringLiteral("featureTypeLineEdit"));
-        featureTypeLineEdit->setGeometry(QRect(630, 50, 113, 20));
-        label_2 = new QLabel(ReportGenerator);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(500, 50, 47, 13));
         label_3 = new QLabel(ReportGenerator);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(500, 80, 101, 16));
+        label_3->setGeometry(QRect(500, 170, 101, 16));
         featureCentroidLatLineEdit = new QLineEdit(ReportGenerator);
         featureCentroidLatLineEdit->setObjectName(QStringLiteral("featureCentroidLatLineEdit"));
-        featureCentroidLatLineEdit->setGeometry(QRect(690, 80, 71, 20));
+        featureCentroidLatLineEdit->setGeometry(QRect(690, 170, 71, 20));
         featureCentroidLonLineEdit = new QLineEdit(ReportGenerator);
         featureCentroidLonLineEdit->setObjectName(QStringLiteral("featureCentroidLonLineEdit"));
-        featureCentroidLonLineEdit->setGeometry(QRect(610, 80, 71, 20));
+        featureCentroidLonLineEdit->setGeometry(QRect(610, 170, 71, 20));
         label_4 = new QLabel(ReportGenerator);
         label_4->setObjectName(QStringLiteral("label_4"));
-        label_4->setGeometry(QRect(500, 110, 47, 13));
+        label_4->setGeometry(QRect(500, 200, 47, 13));
         featureAreaLineEdit = new QLineEdit(ReportGenerator);
         featureAreaLineEdit->setObjectName(QStringLiteral("featureAreaLineEdit"));
-        featureAreaLineEdit->setGeometry(QRect(630, 110, 113, 20));
+        featureAreaLineEdit->setGeometry(QRect(630, 200, 113, 20));
         label_5 = new QLabel(ReportGenerator);
         label_5->setObjectName(QStringLiteral("label_5"));
-        label_5->setGeometry(QRect(500, 140, 47, 13));
+        label_5->setGeometry(QRect(500, 230, 47, 13));
         featureVolumeLineEdit = new QLineEdit(ReportGenerator);
         featureVolumeLineEdit->setObjectName(QStringLiteral("featureVolumeLineEdit"));
-        featureVolumeLineEdit->setGeometry(QRect(630, 140, 113, 20));
-        label_6 = new QLabel(ReportGenerator);
-        label_6->setObjectName(QStringLiteral("label_6"));
-        label_6->setGeometry(QRect(500, 210, 81, 16));
-        imageList = new QListWidget(ReportGenerator);
-        imageList->setObjectName(QStringLiteral("imageList"));
-        imageList->setGeometry(QRect(610, 170, 151, 111));
+        featureVolumeLineEdit->setGeometry(QRect(630, 230, 113, 20));
         pushButton = new QPushButton(ReportGenerator);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(100, 180, 141, 23));
@@ -141,7 +139,48 @@ public:
         refreshListButton->setGeometry(QRect(360, 210, 121, 23));
         copyToClipboardButton = new QPushButton(ReportGenerator);
         copyToClipboardButton->setObjectName(QStringLiteral("copyToClipboardButton"));
-        copyToClipboardButton->setGeometry(QRect(360, 240, 121, 23));
+        copyToClipboardButton->setGeometry(QRect(360, 250, 121, 23));
+        label_7 = new QLabel(ReportGenerator);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(500, 50, 47, 13));
+        label_8 = new QLabel(ReportGenerator);
+        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setGeometry(QRect(500, 80, 47, 13));
+        label_9 = new QLabel(ReportGenerator);
+        label_9->setObjectName(QStringLiteral("label_9"));
+        label_9->setGeometry(QRect(500, 110, 71, 16));
+        featureTypeComboBox = new QComboBox(ReportGenerator);
+        featureTypeComboBox->setObjectName(QStringLiteral("featureTypeComboBox"));
+        featureTypeComboBox->setGeometry(QRect(630, 50, 111, 22));
+        structureStateComboBox = new QComboBox(ReportGenerator);
+        structureStateComboBox->setObjectName(QStringLiteral("structureStateComboBox"));
+        structureStateComboBox->setGeometry(QRect(630, 80, 111, 22));
+        objectTypeComboBox = new QComboBox(ReportGenerator);
+        objectTypeComboBox->setObjectName(QStringLiteral("objectTypeComboBox"));
+        objectTypeComboBox->setGeometry(QRect(630, 110, 111, 22));
+        line_2 = new QFrame(ReportGenerator);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setGeometry(QRect(0, 290, 771, 20));
+        line_2->setFrameShape(QFrame::HLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+        imageList = new QListWidget(ReportGenerator);
+        imageList->setObjectName(QStringLiteral("imageList"));
+        imageList->setGeometry(QRect(600, 350, 151, 241));
+        label_10 = new QLabel(ReportGenerator);
+        label_10->setObjectName(QStringLiteral("label_10"));
+        label_10->setGeometry(QRect(650, 320, 81, 16));
+        featureBarCodeLineEdit = new QLineEdit(ReportGenerator);
+        featureBarCodeLineEdit->setObjectName(QStringLiteral("featureBarCodeLineEdit"));
+        featureBarCodeLineEdit->setGeometry(QRect(630, 140, 113, 20));
+        label_6 = new QLabel(ReportGenerator);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setGeometry(QRect(500, 140, 47, 13));
+        boundingPointList = new QListWidget(ReportGenerator);
+        boundingPointList->setObjectName(QStringLiteral("boundingPointList"));
+        boundingPointList->setGeometry(QRect(10, 350, 151, 241));
+        label_11 = new QLabel(ReportGenerator);
+        label_11->setObjectName(QStringLiteral("label_11"));
+        label_11->setGeometry(QRect(40, 320, 91, 16));
 
         retranslateUi(ReportGenerator);
 
@@ -157,8 +196,6 @@ public:
         loadPointImageFile_2->setText(QApplication::translate("ReportGenerator", "Load Point-Image File", 0));
         loadVolumeFile->setText(QApplication::translate("ReportGenerator", "Load Volume File", 0));
         label->setText(QApplication::translate("ReportGenerator", "Name", 0));
-        featureTypeLineEdit->setText(QString());
-        label_2->setText(QApplication::translate("ReportGenerator", "Type", 0));
         label_3->setText(QApplication::translate("ReportGenerator", "Centroid (Lon/Lat)", 0));
         featureCentroidLatLineEdit->setText(QString());
         featureCentroidLonLineEdit->setText(QString());
@@ -166,10 +203,40 @@ public:
         featureAreaLineEdit->setText(QString());
         label_5->setText(QApplication::translate("ReportGenerator", "Volume", 0));
         featureVolumeLineEdit->setText(QString());
-        label_6->setText(QApplication::translate("ReportGenerator", "Image List", 0));
         pushButton->setText(QApplication::translate("ReportGenerator", "Parse Data", 0));
         refreshListButton->setText(QApplication::translate("ReportGenerator", "Refresh List", 0));
         copyToClipboardButton->setText(QApplication::translate("ReportGenerator", "Copy to Clipboard", 0));
+        label_7->setText(QApplication::translate("ReportGenerator", "Type", 0));
+        label_8->setText(QApplication::translate("ReportGenerator", "State", 0));
+        label_9->setText(QApplication::translate("ReportGenerator", "Object Type", 0));
+        featureTypeComboBox->clear();
+        featureTypeComboBox->insertItems(0, QStringList()
+         << QApplication::translate("ReportGenerator", "NONE", 0)
+         << QApplication::translate("ReportGenerator", "CONTAMINED_AREA", 0)
+         << QApplication::translate("ReportGenerator", "DEBRIS_PILE", 0)
+         << QApplication::translate("ReportGenerator", "OBJECT", 0)
+         << QApplication::translate("ReportGenerator", "PERSON", 0)
+         << QApplication::translate("ReportGenerator", "STRUCTURE", 0)
+         << QApplication::translate("ReportGenerator", "TRAIN", 0)
+        );
+        structureStateComboBox->clear();
+        structureStateComboBox->insertItems(0, QStringList()
+         << QApplication::translate("ReportGenerator", "NONE", 0)
+         << QApplication::translate("ReportGenerator", "DAMAGED", 0)
+         << QApplication::translate("ReportGenerator", "UNDAMAGED", 0)
+        );
+        objectTypeComboBox->clear();
+        objectTypeComboBox->insertItems(0, QStringList()
+         << QApplication::translate("ReportGenerator", "NONE", 0)
+         << QApplication::translate("ReportGenerator", "BOAT", 0)
+         << QApplication::translate("ReportGenerator", "CAR", 0)
+         << QApplication::translate("ReportGenerator", "FIRE", 0)
+         << QApplication::translate("ReportGenerator", "TENT", 0)
+        );
+        label_10->setText(QApplication::translate("ReportGenerator", "Image List", 0));
+        featureBarCodeLineEdit->setText(QString());
+        label_6->setText(QApplication::translate("ReportGenerator", "Bar code", 0));
+        label_11->setText(QApplication::translate("ReportGenerator", "Bounding Point List", 0));
     } // retranslateUi
 
 };

@@ -179,25 +179,38 @@ void Feature::setBoundingPolygon(vector< vector< double>> pPolygon){
     boundingPolygon = pPolygon;
 }
 
+void Feature::setBoundingPoints(vector< BoundingPoint> pPoints){
+    boundingPoints=pPoints;
+}
+
 vector< vector< double>>& Feature::getBoundingPolygon(){
     return boundingPolygon;
 }
 
+vector< BoundingPoint>& Feature::getBoundingPoints(){
+    return boundingPoints;
+}
+
+
+
 void Feature::computeCentroid(){
+    if (centroid.size()!=0)centroid.clear();
+
     double xPos = 0;
     double yPos = 0;
     double zPos = 0;
 
-    for (int i = 0; i < boundingPolygon.size(); i++){
-        xPos += boundingPolygon.at(i).at(0);
-        yPos += boundingPolygon.at(i).at(1);
-        zPos += boundingPolygon.at(i).at(2);
+    for (int i = 0; i < boundingPoints.size(); i++){
+        cout<<"hey"<<endl;
+        xPos += boundingPoints.at(i).coordinates.at(0);
+        yPos += boundingPoints.at(i).coordinates.at(1);
+        zPos += boundingPoints.at(i).coordinates.at(2);
     }
 
-    if (boundingPolygon.size() != 0){
-        xPos = xPos / boundingPolygon.size();
-        yPos = yPos / boundingPolygon.size();
-        zPos = zPos / boundingPolygon.size();
+    if (boundingPoints.size() != 0){
+        xPos = xPos / boundingPoints.size();
+        yPos = yPos / boundingPoints.size();
+        zPos = zPos / boundingPoints.size();
 
     }
 
@@ -223,7 +236,54 @@ void Feature::computeCentroid(){
 
 
 
-
 vector< double > Feature::getCentroid(){
     return centroid;
 }
+
+ void Feature::addImagePath(string pointName, string imagePath)
+ {
+      cout << "adding image " << imagePath << " to point "<< pointName << endl;
+     BoundingPoint* point;
+     //find bounding point
+     for(int i=0;i<boundingPoints.size();i++){
+         if (boundingPoints.at(i).name.compare(pointName)==0){
+             point=&boundingPoints.at(i);
+             cout << "found point" << endl;
+             break;
+         }
+     }
+     //verify if already contain image
+
+     bool contains=false;
+     for(int j=0;j<point->imagePaths.size();j++){
+         if (point->imagePaths.at(j).compare(imagePath)==0){
+             contains=true;
+              cout << "already contains image" << endl;
+             break;
+         }
+     }
+
+     //if not add image
+     if (!contains){
+          cout << "add new image" << endl;
+         point->imagePaths.push_back(imagePath);
+     }
+
+ }
+
+ const vector<string> Feature::getImagePaths(){
+
+     vector<string> imagePaths;
+    cout<< "hey" << endl;
+     for(int i=0;i<boundingPoints.size();i++){
+         BoundingPoint point=boundingPoints.at(i);
+         cout<< "point: " << point.name << endl;
+         for(int j=0;j<point.imagePaths.size();j++){
+            imagePaths.push_back(point.imagePaths.at(j));
+             cout<<"image: " << point.imagePaths.at(j) << endl;
+         }
+     }
+
+     //May contain duplicates
+     return imagePaths;
+ }
