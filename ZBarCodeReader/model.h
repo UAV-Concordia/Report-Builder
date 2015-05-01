@@ -6,7 +6,7 @@
 #include "feature.h"
 #include "pointtoimageparser.h"
 #include "volumefileparser.h"
-
+#include "tinyxml/tinyxml2.h"
 #include "xmlverticesparser.h"
 
 class Model
@@ -23,7 +23,11 @@ public:
 
      //Parse data
      void parseData();
-
+     void parseObjectFile();
+     void parseSurfaceFile();
+     void parseVolumeFile();
+     void parsePointImageFile();
+     void deleteDuplicates(string file);
 
     vector<string> getFeatureNames();
     Feature* getFeature(string);
@@ -35,6 +39,7 @@ private:
     VolumeFileParser surface_parser;
     //XMLSurfaceParser object_parser;
     XMLVerticesParser object_parser;
+    XMLDocument doc;
 
    unordered_map<string,Feature> features;
 

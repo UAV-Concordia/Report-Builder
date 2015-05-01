@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include "../Pix4DOutput/tinyxml/tinyxml2.h"
+#include "tinyxml/tinyxml2.h"
 #include "feature.h"
 
 

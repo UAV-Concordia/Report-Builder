@@ -133,6 +133,186 @@ void Model::setObjectFile(string filepath){
     object_parser.readFile();
 
 }
+void Model::deleteDuplicates(string file)
+{
+    doc.LoadFile(file.c_str());
+
+        XMLElement* rootElement = doc.RootElement();
+        rootElement->Attribute("id", "root_doc");
+        XMLElement* documentElement = rootElement;//->FirstChildElement();
+        //XMLElement* folderElement = documentElement->FirstChildElement();
+
+        for (XMLElement* child = documentElement; child != NULL; child = child->NextSiblingElement())
+        {
+          //  if ((child->Attribute("name")))
+            //{
+                qDebug() << "PRINTING 2" << child->Name() << endl;
+
+                //child->DeleteChildren();
+
+             //   XmlMaker::writeObject(obj, child);
+
+                //doc.FirstChildElement()->LinkEndChild(element);
+
+               // doc.SaveFile(file.c_str());
+
+               // return;
+            //}
+        }
+}
+
+void Model::parseObjectFile(){
+    QString objectFilePath=QString::fromStdString(object_parser.getFilepath());
+    if (!objectFilePath.trimmed().isEmpty())
+   {
+       // deleteDuplicates(objectFilePath.toStdString());
+
+        //Parse
+        qDebug() << "Parsing";
+       object_parser.parse();
+       qDebug() << "Parsed";
+       QFileInfo fileInfo= QFileInfo(objectFilePath);
+       QString fileName =fileInfo.fileName();
+
+       QStringList fileNameParts=fileName.split(QChar('_'));
+       QString featureName=fileNameParts.first();
+       qDebug() << "Feature name: " << featureName;
+
+       //Retrieve data
+     qDebug() << "Number of object: " << object_parser.getNumberOfParsedObjects();
+
+           string newFeatureName=featureName.toStdString();
+           Feature newFeature(newFeatureName);
+
+
+           vector< BoundingPoint> newBoundingPoints=object_parser.getBoundingPoints();
+           newFeature.setBoundingPoints(newBoundingPoints);
+           newFeature.computeCentroid();
+
+           std::pair<std::string, Feature > entry;
+
+           entry.first = newFeatureName;
+           entry.second = newFeature;
+
+          features.insert(entry);
+                       cout << "inserted feature" << endl;;
+       }
+}
+
+void Model::parseSurfaceFile(){
+    QString surfaceFilePath=QString::fromStdString(surface_parser.getFilepath());
+    if (!surfaceFilePath.trimmed().isEmpty())
+   {
+
+       //Parse
+       surface_parser.parse();
+
+       //Retrieve data
+       qDebug() << "Number of volume: " << surface_parser.getNumberOfVolumetricData();
+
+       for (int i=0;i<surface_parser.getNumberOfVolumetricData();i++){
+           VolumetricData newVolumetricData=surface_parser.getVolumetricData(i);
+
+             std::string input=newVolumetricData.objectName;
+             std::cout << "who? ";
+
+
+             std::unordered_map<std::string,Feature>::iterator got = features.find (input);
+
+             if ( got == features.end() ){
+               continue;
+                  std::cout << "not found";
+             }else{
+                 std::cout << "found" << got->first;
+                 Feature feature= got->second;
+                 feature.setArea(newVolumetricData.projected2Darea);
+                 got->second=feature;
+             }
+
+
+
+
+             std::cout << std::endl;
+
+
+
+       }
+   }
+}
+
+void Model::parseVolumeFile(){
+    QString volumeFilePath=QString::fromStdString(volume_parser.getFilepath());
+    if (!volumeFilePath.trimmed().isEmpty())
+   {
+       //Parse
+       volume_parser.parse();
+
+       //Retrieve data
+       qDebug() << "Number of volume: " << volume_parser.getNumberOfVolumetricData();
+
+       for (int i=0;i<volume_parser.getNumberOfVolumetricData();i++){
+           VolumetricData newVolumetricData=volume_parser.getVolumetricData(i);
+
+             std::string input=newVolumetricData.objectName;
+             std::cout << "who? ";
+
+
+             std::unordered_map<std::string,Feature>::iterator got = features.find (input);
+
+             if ( got == features.end() ){
+               continue;
+                  std::cout << "not found";
+             }else{
+                 std::cout << "found";
+                 Feature feature= got->second;
+                 feature.setVolume(newVolumetricData.totalVolume);
+                 got->second=feature;
+             }
+
+
+
+
+             std::cout << std::endl;
+
+       }
+   }
+
+}
+
+void Model::parsePointImageFile(){
+    QString imagePointFilePath=QString::fromStdString(pti_parser.getFilepath());
+    if (!imagePointFilePath.trimmed().isEmpty())
+   {
+       pti_parser.parse();
+
+        std::unordered_map<std::string, std::vector<MapPoint> > pointMap=pti_parser.getMapPoint();
+
+
+        for (auto& imageEntry : pointMap){
+           vector<MapPoint> points=imageEntry.second;
+           for(int i=0;i<points.size();i++){
+
+              for (auto& featureEntry : features){
+                   Feature feature=featureEntry.second;
+                   vector<BoundingPoint> boundingPoints=feature.getBoundingPoints();
+
+                   for (int j=0;j<boundingPoints.size();j++){
+                       if(points.at(i).name==boundingPoints.at(j).name){
+                           //Add image to bounding point
+                           qDebug() << QString::fromStdString(imageEntry.first);
+                           qDebug() << QString::fromStdString(boundingPoints.at(j).name);
+                          feature.addImagePath(boundingPoints.at(j).name, imageEntry.first);
+                          featureEntry.second=feature;
+                       }
+                   }
+
+              }
+
+           }
+        }
+
+   }
+}
 
 void Model::parseData(){
 

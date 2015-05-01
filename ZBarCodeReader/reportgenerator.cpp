@@ -69,7 +69,7 @@ void ReportGenerator::on_loadObjectFileButton_clicked()
      qDebug() << "Load object File";
 
      QString filePath = QFileDialog::getOpenFileName(this,
-          tr("Open Object File"), ".");
+          tr("Open Object File"), ".", "KML files (*_vertices.kml)");
 
      QFileInfo fileInfo= QFileInfo(filePath);
      QString fileName =fileInfo.fileName();
@@ -78,6 +78,8 @@ void ReportGenerator::on_loadObjectFileButton_clicked()
 
      //update this in the model
     model->setObjectFile(filePath.toStdString());
+
+    model->parseObjectFile();
 }
 
 
@@ -86,7 +88,7 @@ void ReportGenerator::on_loadSurfaceFileButton_clicked()
     qDebug() << "Load surface File";
 
     QString filePath = QFileDialog::getOpenFileName(this,
-         tr("Open Object File"), ".");
+         tr("Open Object File"), ".", "Text files (*.txt)");
 
     QFileInfo fileInfo= QFileInfo(filePath);
     QString fileName =fileInfo.fileName();
@@ -95,6 +97,8 @@ void ReportGenerator::on_loadSurfaceFileButton_clicked()
     //update this in the model
 
     model->setSurfaceFile(filePath.toStdString());
+
+    model->parseSurfaceFile();
 }
 
 void ReportGenerator::on_loadVolumeFile_clicked()
@@ -102,7 +106,7 @@ void ReportGenerator::on_loadVolumeFile_clicked()
     qDebug() << "Load volume File";
 
     QString filePath = QFileDialog::getOpenFileName(this,
-         tr("Open Object File"), ".");
+         tr("Open Object File"), ".", "Text files (*.txt)");
 
     QFileInfo fileInfo= QFileInfo(filePath);
     QString fileName =fileInfo.fileName();
@@ -110,6 +114,8 @@ void ReportGenerator::on_loadVolumeFile_clicked()
 
     //update this in the model
     model->setVolumeFile(filePath.toStdString());
+
+    model->parseVolumeFile();
 }
 
 void ReportGenerator::on_loadPointImageFile_2_clicked()
@@ -125,6 +131,8 @@ void ReportGenerator::on_loadPointImageFile_2_clicked()
 
     //update this in the model
     model->setPointToImageFile(filePath.toStdString());
+
+    model->parsePointImageFile();
 }
 
 
@@ -553,5 +561,10 @@ void ReportGenerator::on_featureBarCodeLineEdit_editingFinished()
         displayFeature();
     }
 
+
+}
+
+void ReportGenerator::on_featureList_activated(const QModelIndex &index)
+{
 
 }

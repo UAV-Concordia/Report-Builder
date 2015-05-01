@@ -55,6 +55,8 @@ private slots:
 
     void on_featureBarCodeLineEdit_editingFinished();
 
+    void on_featureList_activated(const QModelIndex &index);
+
 private:
     Ui::ReportGenerator *ui;
     QTextDocument * const m_document;
