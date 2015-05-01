@@ -138,35 +138,76 @@ void Model::deleteDuplicates(string file)
     doc.LoadFile(file.c_str());
 
         XMLElement* rootElement = doc.RootElement();
-        rootElement->Attribute("id", "root_doc");
-        XMLElement* documentElement = rootElement;//->FirstChildElement();
+        //rootElement->Attribute("id", "root_doc");
+        XMLElement* documentElement = rootElement->FirstChildElement()->FirstChildElement()->FirstChildElement();
         //XMLElement* folderElement = documentElement->FirstChildElement();
 
-        for (XMLElement* child = documentElement; child != NULL; child = child->NextSiblingElement())
+        XMLElement* child;
+        string prevPoint = "";
+        int count = 0;
+
+
+        for (child = documentElement->NextSiblingElement(); child != NULL; child = child->NextSiblingElement())
         {
-          //  if ((child->Attribute("name")))
-            //{
-                qDebug() << "PRINTING 2" << child->Name() << endl;
+            if(count == 0)
+            {
+                prevPoint = child->FirstChildElement()->GetText();
+                count ++;
+            }
+            else
+            {
+                if (prevPoint.compare(child->FirstChildElement()->GetText()) == 0)
+                {
+                    qDebug() << "PRINTING 2" << child->Name() << endl;
 
-                //child->DeleteChildren();
+                  \
+                   // child->Parent()->DeleteChild(child);
+                    //child->DeleteNode(child);
 
-             //   XmlMaker::writeObject(obj, child);
-
-                //doc.FirstChildElement()->LinkEndChild(element);
-
-               // doc.SaveFile(file.c_str());
-
-               // return;
-            //}
+                    child->DeleteChildren();
+                }
+                else
+                {
+                     prevPoint = child->FirstChildElement()->GetText();
+                }
+            }
         }
+
+        doc.SaveFile(file.c_str());
+
+        QString str = QString::fromStdString(file);
+
+        Model::removeLine(str, "<Placemark/>");
 }
 
+void Model::removeLine(QString file, QString regex)
+{
+   QFile f(file);
+   if(f.open(QIODevice::ReadWrite | QIODevice::Text))
+   {
+       QString textToKeep;
+       QTextStream txt(&f);
+
+       while(!txt.atEnd())
+       {
+           QString line = txt.readLine();
+
+           if(!line.contains(regex))
+               textToKeep.append(line+"\n");
+       }
+
+       f.resize(0);
+       txt << textToKeep;
+       f.close();
+   }
+}
 void Model::parseObjectFile(){
     QString objectFilePath=QString::fromStdString(object_parser.getFilepath());
     if (!objectFilePath.trimmed().isEmpty())
    {
-       // deleteDuplicates(objectFilePath.toStdString());
+        deleteDuplicates(objectFilePath.toStdString());
 
+        Model::setObjectFile(objectFilePath.toStdString());
         //Parse
         qDebug() << "Parsing";
        object_parser.parse();

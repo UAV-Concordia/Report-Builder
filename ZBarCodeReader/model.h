@@ -8,7 +8,7 @@
 #include "volumefileparser.h"
 #include "tinyxml/tinyxml2.h"
 #include "xmlverticesparser.h"
-
+#include <QString>
 class Model
 {
 public:
@@ -28,6 +28,7 @@ public:
      void parseVolumeFile();
      void parsePointImageFile();
      void deleteDuplicates(string file);
+     void removeLine(QString file, QString regex);
 
     vector<string> getFeatureNames();
     Feature* getFeature(string);
